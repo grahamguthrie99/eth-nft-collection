@@ -26,6 +26,8 @@ contract SampleNFTCollection is ERC721URIStorage {
     }
     Waypoint[] waypoints;
 
+    event NewLocationNFTMinted(address sender, uint256 tokenId);
+
     constructor() ERC721("SquareNFT", "SQUARE") {
         console.log("This is my NFT contract. Woah!");
         Waypoint memory atlanta = Waypoint(
@@ -136,5 +138,7 @@ contract SampleNFTCollection is ERC721URIStorage {
             newItemId,
             msg.sender
         );
+
+        emit NewLocationNFTMinted(msg.sender, newItemId);
     }
 }
