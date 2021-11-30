@@ -14,7 +14,7 @@ contract SampleNFTCollection is ERC721URIStorage {
     // This is our SVG code. All we need to change is the word that's displayed. Everything else stays the same.
     // So, we make a baseSvg variable here that all our NFTs can use.
     string baseSvg =
-        "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: serif; font-size: 24px; }</style><rect width='100%' height='100%' fill='black' /><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
+        "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: serif; font-size: 24px; }</style><rect width='100%' height='100%' fill='black' />";
 
     // I create three arrays, each with their own theme of random words.
     // Pick some random funny words, names of anime characters, foods you like, whatever!
@@ -33,11 +33,19 @@ contract SampleNFTCollection is ERC721URIStorage {
             "33.7490 N",
             "84.3880 W"
         );
-        Waypoint memory test2 = Waypoint("Test2, GA USA", "34 N", "85 W");
-        Waypoint memory test3 = Waypoint("Test3, GA USA", "45 N", "95 W");
+        Waypoint memory boston = Waypoint(
+            "Boston, MA USA",
+            "42.3601 N",
+            "71.0589 W"
+        );
+        Waypoint memory chicago = Waypoint(
+            "Chicago, IL USA",
+            "41.8781 N",
+            "87.6298 W"
+        );
         waypoints.push(atlanta);
-        waypoints.push(test2);
-        waypoints.push(test3);
+        waypoints.push(boston);
+        waypoints.push(chicago);
     }
 
     // I create a function to randomly pick a word from each array.
@@ -81,8 +89,13 @@ contract SampleNFTCollection is ERC721URIStorage {
         string memory finalSvg = string(
             abi.encodePacked(
                 baseSvg,
+                "<text x='50%' y='40%' class='base' dominant-baseline='middle' text-anchor='middle'>",
                 destination,
+                "</text>",
+                "<text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>",
                 latitude,
+                "</text>",
+                "<text x='50%' y='60%' class='base' dominant-baseline='middle' text-anchor='middle'>",
                 longitude,
                 "</text></svg>"
             )
